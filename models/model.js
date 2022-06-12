@@ -6,22 +6,31 @@ const dataSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-    age: {
+    email:{
+        required:true,
+        type:String
+    },
+    phone: {
         required: true,
         type: Number
+    },
+    address:{
+        required:true,
+        type:String
     },
     password:{
         required:true,
         type:String
     },
-    tokens:[
-        {
-            token:{
-                required:true,
-                type:String
-            }
-        }
-    ]
+    // tokens:[
+    //     {
+    //         token:{
+    //             required:true,
+    
+    //             type:String
+    //         }
+    //     }
+    // ]
 
 })
 dataSchema.pre('save', async function(next){
@@ -34,17 +43,17 @@ dataSchema.pre('save', async function(next){
 });
 
 // generating token
-dataSchema.methods.generateAuthToken = async function() {
-    try {
-        let token = jwt.sign({_id:this._id} ,process.env.SECRET_KEY);
-        this.tokens=this.tokens.concat({token:token});
-        await this.save();
-        return token;
-    } catch (error) {
-        console.log(error)
-    }
+// dataSchema.methods.generateAuthToken = async function() {
+//     try {
+//         let token = jwt.sign({_id:this._id} ,process.env.SECRET_KEY);
+//         this.tokens=this.tokens.concat({token:token});
+//         await this.save();
+//         return token;
+//     } catch (error) {
+//         console.log(error)
+//     }
     
-}
+// }
 
-const Data =  mongoose.model('DATA', dataSchema);
-module.exports=Data;
+const User =  mongoose.model('USER', dataSchema);
+module.exports=User;

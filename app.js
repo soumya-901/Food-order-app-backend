@@ -4,7 +4,7 @@ const routes = require('./routes/routes');
 require('dotenv').config();
 
 const app = express();
-const port =process.env.PORT;
+const port =process.env.PORT || 3000;
 const DB =process.env.DB_LOCAL;
 const DBITEM= process.env.DB_LOCAL2;
 app.use(express.json());
