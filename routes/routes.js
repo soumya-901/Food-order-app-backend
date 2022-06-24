@@ -143,9 +143,9 @@ router.patch('/changepwd/:id', async (req, res) => {
     }
 })
 //Get all Method
-router.get('/getalluser', async(req, res) => {
+router.get('/getall/user', async(req, res) => {
     const allData= await Model.find()
-    console.log(allData)
+    // console.log(allData)
     res.send(allData)
 })
 router.get('/getAll/item', async(req, res) => {
