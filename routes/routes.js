@@ -39,14 +39,15 @@ router.post('/post/item', async (req, res) => {
         destination: (req, file, cb) => cb(null, 'uploads/') ,
         filename: (req, file, cb) => {
             const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${path.extname(file.originalname)}`;
-                  cb(null, uniqueName)
+            cb(null, uniqueName)
         } ,
     });
-    let imageupload = multer({ storage, limits:{ fileSize: 1000000 * 100 }, }).single('image');
+    let imageupload = multer({ storage, limits:{ fileSize: 1000000 * 100 }, }).single('filename');
     try {
         imageupload(req, res, async (err) => {
             if (err) {
-              return res.status(500).send({ error: err.message });
+                console.log(err);
+                return res.status(500).send({ error: err.message });
             }
             const data = new Item({
                 itemname:req.body.itemname,
