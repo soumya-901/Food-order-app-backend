@@ -29,6 +29,9 @@ mongoose.connect(DBITEM,{
 // .catch((err)=>{
 //     console.log(err)
 // })
+app.get('/',(req ,res)=>{
+    res.send('api work properly , kindly use proper route to get the content');
+})
 app.use('/api', routes)
 app.use(express.json());
 
