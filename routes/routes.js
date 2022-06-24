@@ -28,7 +28,7 @@ router.post('/post', async (req, res) => {
             password:req.body.password
         })
         const dataToSave = await data.save();
-        res.status(200).json(dataToSave)
+        res.status(200).json(dataToSave);
     }
     catch (error) {
         res.status(400).json({message: error.message})
