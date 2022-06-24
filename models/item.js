@@ -17,7 +17,7 @@ const itemSchema = new mongoose.Schema({
 itemSchema.pre('save', async function(next){
         if (this.isModified('uuid')) {
             console.log("hello")
-            this.url = `${process.env.PORT}/api/${this.uuid}`;
+            this.url = `https://food-order-app100.herokuapp.com/api/${this.uuid}`;
             // this.password=bcrypt.hash(this.password,12);
         }
         next();
