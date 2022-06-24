@@ -4,7 +4,8 @@
   "description": "this is my gate to gloom into the backend world",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "nodemon":"nodemon app.js"
   },
   "repository": {
     "type": "git",

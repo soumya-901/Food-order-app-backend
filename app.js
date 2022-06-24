@@ -6,10 +6,10 @@ require('dotenv').config();
 const app = express();
 const port =process.env.PORT || 3000;
 const DB =process.env.DB_LOCAL;
-const DBITEM= process.env.DB_LOCAL2;
+const DBITEM= process.env.DB_ATLAS;
 app.use(express.json());
 
-mongoose.connect(DB,{
+mongoose.connect(DBITEM,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
 })

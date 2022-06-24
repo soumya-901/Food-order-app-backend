@@ -12,7 +12,7 @@ const dataSchema = new mongoose.Schema({
     },
     phone: {
         required: true,
-        type: Number
+        type: String
     },
     address:{
         required:true,

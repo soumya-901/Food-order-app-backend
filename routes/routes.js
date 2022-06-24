@@ -65,6 +65,7 @@ router.post('/post/item', async (req, res) => {
         });
     }
     catch (error) {
+        console.log(error.message)
         res.status(400).json({message: error.message})
     }
 })
@@ -86,10 +87,10 @@ router.post('/signin', async (req, res) => {
         if(userExist)
         {
             // console.log(userExist.password)
-            // const ismatch= await bcrypt.compare(password,userExist.password);
+            const ismatch= await bcrypt.compare(password,userExist.password);
             // console.log(userExist.password)
             const Password = userExist.password;
-            if (password===Password) {
+            if (ismatch) {
             //     const token = await userExist.generateAuthToken();
             //     console.log(token)
             //     res.cookie("jwt_web_token",token,{
