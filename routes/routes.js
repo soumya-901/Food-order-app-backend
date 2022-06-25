@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const Model = require('../models/model');
 const Item = require('../models/item')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const router = express.Router()
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
@@ -92,12 +92,14 @@ router.post('/signin', async (req, res) => {
             // console.log(userExist.password)
             const Password = userExist.password;
             if (ismatch) {
-            //     const token = await userExist.generateAuthToken();
-            //     console.log(token)
-            //     res.cookie("jwt_web_token",token,{
-            //         expires:new Date(Date.now()+258920000),
-            //         httpOnly:true
-            //     })
+                const token = await userExist.generateAuthToken(userExist._id);
+                // console.log(token)
+                // const check = await userExist.checktoken(token);
+                // console.log(check._id);
+                res.cookie("jwt_web_token",token,{
+                    expires:new Date(Date.now()+40000),
+                    httpOnly:true
+                })
                 // console.log(ismatch)
                res.json({message:"success"})
             } 
