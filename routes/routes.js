@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const Model = require('../models/model');
 const Item = require('../models/item')
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const router = express.Router()
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
@@ -71,14 +71,14 @@ router.post('/post/item', async (req, res) => {
     }
 })
 router.get('/:uuid',async (req, res) => {
-    const file = await Item.findOne({ uuid: req.params.uuid});
+    const file = await Item.findOne({ uuid:req.params.uuid});
     // Link expired
     if(!file) {
         return res.status(410).json({ error: 'Link has been expired.'});
     } 
 //     const response = await file.save();
     const filePath = `${__dirname}/../${file.path}`;
-    res.render(filePath);
+    res.download(filePath);
 });
 
 router.post('/signin', async (req, res) => {
@@ -143,6 +143,28 @@ router.patch('/changepwd/:id', async (req, res) => {
         }
     } catch (error) {
         res.status(400).json({message: error.message})
+    }
+})
+router.post('/additem',async(req,res)=>{
+    console.log("int th");
+    const {userid,itemid}= req.body;
+    try {
+        const userExist = await Model.findById(userid);
+        const itemExist = await Item.findById(itemid);
+        // console.log(userExist);
+        // console.log(itemExist);
+        if(!userExist)
+        {
+            res.send('invalid user or invalid item');
+        }
+        else{
+            console.log("inside else")
+            const value = await userExist.addItem(itemExist);
+            // console.log(value);
+            res.send('done')
+        }
+    } catch (error) {
+        console.log(error);
     }
 })
 //Get all Method
