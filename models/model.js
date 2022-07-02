@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const user = require('./item');
 const dataSchema = new mongoose.Schema({
     name: {
         required: true,
@@ -23,15 +24,9 @@ const dataSchema = new mongoose.Schema({
         type:String
     },
     
-    // tokens:[
-    //     {
-    //         token:{
-    //             required:true,
-    
-    //             type:String
-    //         }
-    //     }
-    // ]
+    itemInCart:[
+       
+    ]
 
 })
 dataSchema.pre('save', async function(next){
@@ -54,6 +49,16 @@ dataSchema.methods.generateAuthToken = async function(id) {
         console.log(error);
     }
     
+}
+dataSchema.methods.addItem = async function(item){
+    try {
+        // console.log(item)
+        this.itemInCart.push(item);
+        await this.save();
+        return this.itemInCart;
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 
